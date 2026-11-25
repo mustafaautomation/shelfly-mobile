@@ -31,7 +31,7 @@ function greeting(now = new Date()): string {
 
 export default function HomeScreen() {
   const { actor, repo, revision, mode } = useWorkspace();
-  const { fontFamily } = useShelflyTheme();
+  const { colors, fontFamily } = useShelflyTheme();
   const board = useAsync(() => repo.getDashboard(), [actor?.activeTenantId, revision]);
   const firstName = actor?.name.split(' ')[0] ?? '';
   const floor = isFloorRole(actor?.role);
@@ -40,7 +40,7 @@ export default function HomeScreen() {
     <Screen testID="home">
       <View style={styles.top}>
         <View style={{ flex: 1 }}>
-          <Text style={[styles.hello, { fontFamily: fontFamily?.display }]} accessibilityRole="header">
+          <Text style={[styles.hello, { color: colors.ink, fontFamily: fontFamily?.display }]} accessibilityRole="header">
             {greeting()}, {firstName}
           </Text>
         </View>

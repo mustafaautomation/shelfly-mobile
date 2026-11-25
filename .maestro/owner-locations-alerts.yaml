@@ -1,0 +1,20 @@
+# An owner checks stock by location, sends a draft order and clears low-stock alerts.
+appId: com.quvantic.shelfly
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the demo"
+- tapOn:
+    id: "demo-usr_nw_owner"
+- tapOn: "Locations"
+- assertVisible: "Oakland Roastery"
+- assertVisible: "West Coast Fulfillment"
+- tapOn: "Orders"
+- tapOn: "Drafts"
+- tapOn: "NW-1048.*"
+- tapOn: "Mark as sent to supplier"
+- assertVisible: ".*is marked as sent.*"
+- back
+- tapOn: "Alerts.*"
+- tapOn: "Mark all 3 read"
+- assertVisible: ".*You are caught up.*"

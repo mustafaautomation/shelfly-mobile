@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router';
 
 import { isFloorRole } from '@/domain/access';
 import { useShelflyTheme } from '@/theme/ThemeProvider';
-import { LoadingBlock, Screen } from '@/ui/components';
+import { LoadingBlock, RailContext, Screen } from '@/ui/components';
 import { ShelflyTabBar } from '@/ui/TabBar';
 import { useAsync } from '@/ui/useAsync';
 import { useWorkspace } from '@/workspace/WorkspaceProvider';
@@ -30,7 +30,8 @@ export default function TabsLayout() {
   const unread = alerts.data ?? 0;
 
   return (
-    <Tabs
+    <RailContext.Provider value>
+      <Tabs
       tabBar={(props) => <ShelflyTabBar {...props} />}
       screenOptions={{ headerShown: false, sceneStyle: { backgroundColor: colors.bg } }}
     >
@@ -41,6 +42,7 @@ export default function TabsLayout() {
       <Tabs.Screen name="orders" options={{ title: 'Orders' }} />
       <Tabs.Screen name="alerts" options={{ title: 'Alerts', tabBarBadge: unread > 0 ? unread : undefined }} />
       <Tabs.Screen name="more" options={{ title: 'More' }} />
-    </Tabs>
+      </Tabs>
+    </RailContext.Provider>
   );
 }

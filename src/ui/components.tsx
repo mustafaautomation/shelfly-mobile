@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { type ComponentProps, type ReactNode } from 'react';
+import { createContext, useContext, type ComponentProps, type ReactNode } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -28,6 +28,9 @@ import { useWorkspace } from '@/workspace/WorkspaceProvider';
 
 export type IconName = ComponentProps<typeof Ionicons>['name'];
 
+/** True inside the tab navigator, where the wide-screen side rail sits to the left of every screen. */
+export const RailContext = createContext(false);
+
 export function useWide(): boolean {
   return useWindowDimensions().width >= 960;
 }
@@ -44,9 +47,10 @@ export function Screen({
   testID?: string;
 }) {
   const { colors } = useShelflyTheme();
-  const { online, stale, actor } = useWorkspace();
+  const { online, stale } = useWorkspace();
   const insets = useSafeAreaInsets();
-  const wide = useWide() && Boolean(actor);
+  const inTabs = useContext(RailContext);
+  const wide = useWide() && inTabs;
   const banner = !online
     ? 'You are offline. Shelfly is showing the last saved copy of these shelves. Stock changes wait for a connection.'
     : stale

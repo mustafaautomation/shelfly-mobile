@@ -1,0 +1,32 @@
+# Receive the PacCoast partial delivery: count two cartons, post, then receive the rest.
+appId: com.quvantic.shelfly
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the demo"
+- tapOn:
+    id: "demo-usr_nw_staff"
+- tapOn: "Orders"
+- tapOn:
+    id: "po-po_nw_1044"
+- tapOn:
+    id: "receive-po"
+- tapOn:
+    id: "code-input"
+- inputText: "840011000017"
+- tapOn: "Count"
+- tapOn:
+    id: "code-input"
+- inputText: "840011000017"
+- tapOn: "Count"
+- assertVisible: ".*2 of 300.*"
+- tapOn:
+    id: "post-receipt"
+- assertVisible: "Partial receipt posted"
+- tapOn: "Back to the order"
+- tapOn:
+    id: "receive-po"
+- tapOn: "Fill all remaining"
+- tapOn:
+    id: "post-receipt"
+- assertVisible: "Order complete"

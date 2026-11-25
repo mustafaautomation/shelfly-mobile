@@ -1,0 +1,22 @@
+# Warehouse staff look up a bag by barcode and post a damaged-stock adjustment.
+# The camera cannot be driven in a simulator, so the flow types the code the camera would read.
+appId: com.quvantic.shelfly
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the demo"
+- tapOn:
+    id: "demo-usr_nw_staff"
+- assertVisible: "Needs restock"
+- tapOn: "Scan"
+- tapOn:
+    id: "code-input"
+- inputText: "840011000012"
+- tapOn: "Look up"
+- assertVisible: "Ethiopia 12oz"
+- tapOn: "Adjust"
+- tapOn: "Damaged"
+- tapOn:
+    id: "submit-stock"
+- assertVisible: "Posted"
+- assertVisible: "59 bag"

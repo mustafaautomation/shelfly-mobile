@@ -1,0 +1,11 @@
+# Magic link through the on-device demo inbox.
+appId: com.quvantic.shelfly
+---
+- launchApp:
+    clearState: true
+- tapOn: "Email me a sign-in link"
+- tapOn: "Email"
+- inputText: "floor@harbor.demo"
+- tapOn: "Send magic link"
+- tapOn: "Open the link from the demo inbox"
+- assertVisible: "Harbor Auto Parts"

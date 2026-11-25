@@ -1,0 +1,27 @@
+# A viewer cannot change stock, and Harbor never sees a Northwind SKU.
+appId: com.quvantic.shelfly
+---
+- launchApp:
+    clearState: true
+- tapOn: "Try the demo"
+- tapOn:
+    id: "demo-usr_nw_viewer"
+- assertVisible: ".*viewer seat.*"
+- tapOn: "Items"
+- tapOn:
+    id: "item-prd_eth_12"
+- assertVisible: ".*Viewers can look, not post.*"
+- assertNotVisible: "Adjust"
+- back
+- tapOn: "More"
+- scrollUntilVisible:
+    element: "Sign out"
+- tapOn: "Sign out"
+- tapOn: "Try the demo"
+- tapOn:
+    id: "demo-usr_hb_owner"
+- tapOn: "Items"
+- tapOn:
+    id: "item-search"
+- inputText: "Ethiopia"
+- assertVisible: "No matches"
